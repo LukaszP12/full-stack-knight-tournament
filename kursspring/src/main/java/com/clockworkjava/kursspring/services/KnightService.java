@@ -16,6 +16,9 @@ public class KnightService {
     @Autowired
     private KnightRepository knightRepository;
 
+    @Autowired
+    private PlayerInformation playerInformation;
+
     public List<Knight> getAllKnights() throws NotImplementedException {
         return new ArrayList<>(knightRepository.getAllKnights());
     }
@@ -44,6 +47,19 @@ public class KnightService {
                 .sum();
 
         return sumOfRewards;
+    }
+
+    public void getMyGold() throws NotImplementedException {
+
+        List<Knight> allKnights = getAllKnights();
+        allKnights.stream().forEach(knight -> {
+            if (knight.getQuest() != null) {
+                knight.getQuest().isCompleted();
+            }
+        });
+
+        int currentGold = playerInformation.getGold();
+        playerInformation.setGold(currentGold + collectRewards());
     }
 
 }

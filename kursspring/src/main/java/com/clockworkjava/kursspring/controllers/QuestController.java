@@ -49,16 +49,7 @@ public class QuestController {
     @RequestMapping(value = "/checkQuests", method = RequestMethod.GET)
     public String checkQuests() throws NotImplementedException {
 
-        List<Knight> allKnights = knightService.getAllKnights();
-        allKnights.stream().forEach(knight -> {
-            if (knight.getQuest() != null) {
-                knight.getQuest().isCompleted();
-            }
-        });
-
-        int currentGold = playerInformation.getGold();
-
-        playerInformation.setGold(currentGold + knightService.collectRewards());
+        knightService.getMyGold();
 
         return "redirect:/knights";
     }
