@@ -25,12 +25,6 @@ public class Knight {
     public Knight() {
     }
 
-    //    public Knight(String name, int age, Quest quest) {
-//        this.name = name;
-//        this.age = age;
-////        this.quest = quest;
-//    }
-//
     public Knight(String name, int age) {
         this.name = name;
         this.age = age;
