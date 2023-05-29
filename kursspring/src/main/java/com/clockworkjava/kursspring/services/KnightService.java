@@ -55,6 +55,10 @@ public class KnightService {
                 .mapToInt(knight -> knight.getQuest().getReward())
                 .sum();
 
+        knightRepository.getAllKnights().stream().filter(knightPredicate).forEach(knight -> {
+            knight.setQuest(null);
+        });
+
         return sumOfRewards;
     }
 
