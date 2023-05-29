@@ -50,10 +50,6 @@ public class Knight {
         return Objects.hash(age);
     }
 
-    //    public void setQuest(Quest quest) {
-//        this.quest = quest;
-//    }
-
     public void setQuest(Quest quest) {
         if (quest != null) {
             quest.setStarted(true);
