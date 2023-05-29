@@ -7,8 +7,10 @@ import com.clockworkjava.kursspring.domain.repository.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class KnightService {
@@ -40,9 +42,16 @@ public class KnightService {
     }
 
     public int collectRewards() throws NotImplementedException {
-        int sumOfRewards = knightRepository.getAllKnights()
-                .stream()
-                .filter(knight -> knight.getQuest().isCompleted())
+
+        Predicate<Knight> knightPredicate = knight -> {
+            if (knight.getQuest() != null) {
+                return knight.getQuest().isCompleted();
+            } else {
+                return false;
+            }
+        };
+
+        int sumOfRewards = knightRepository.getAllKnights().stream().filter(knightPredicate)
                 .mapToInt(knight -> knight.getQuest().getReward())
                 .sum();
 
