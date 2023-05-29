@@ -59,6 +59,10 @@ public class Knight {
         this.quest = quest;
     }
 
+    public Quest getQuest() {
+        return quest;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -89,10 +93,6 @@ public class Knight {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public Quest getQuest() {
-        return quest;
     }
 
     @Override
