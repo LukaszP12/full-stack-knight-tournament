@@ -44,14 +44,6 @@ public class Quest {
         this.started = started;
     }
 
-    public boolean isQuestCompleted() {
-
-        LocalDateTime now = LocalDateTime.now();
-
-
-        return false;
-    }
-
     public boolean isCompleted() {
         if (this.completed) {
             return this.completed;

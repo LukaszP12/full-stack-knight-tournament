@@ -51,7 +51,9 @@ public class QuestController {
 
         List<Knight> allKnights = knightService.getAllKnights();
         allKnights.stream().forEach(knight -> {
-            knight.getQuest().isCompleted();
+            if (knight.getQuest() != null) {
+                knight.getQuest().isCompleted();
+            }
         });
 
         int currentGold = playerInformation.getGold();
