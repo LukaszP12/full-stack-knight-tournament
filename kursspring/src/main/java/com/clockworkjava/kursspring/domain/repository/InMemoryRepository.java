@@ -18,7 +18,8 @@ public class InMemoryRepository implements KnightRepository {
     }
 
     @Override
-    public void createKnight(Knight knight) {
+    public void createKnight(String name, int age) throws NotImplementedException {
+        Knight knight = new Knight(name, age);
         knight.setId(Ids.getNewId(knights.keySet()));
         knights.put(knight.getId(), knight);
     }
@@ -65,9 +66,9 @@ public class InMemoryRepository implements KnightRepository {
 
     @Override
     @PostConstruct
-    public void build() {
-        createKnight(new Knight("Lancelot", 29));
-        createKnight(new Knight("Percival", 25));
+    public void build() throws NotImplementedException {
+        createKnight("Lancelot", 29);
+        createKnight("Percival", 25);
     }
 
     @Override
