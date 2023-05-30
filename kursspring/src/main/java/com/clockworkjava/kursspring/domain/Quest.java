@@ -4,11 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 public class Quest {
@@ -33,6 +31,10 @@ public class Quest {
     private Knight knight;
 
     public Quest() {
+    }
+
+    public Quest(String description) {
+        this.description = description;
     }
 
     public Quest(int id, String description) {
