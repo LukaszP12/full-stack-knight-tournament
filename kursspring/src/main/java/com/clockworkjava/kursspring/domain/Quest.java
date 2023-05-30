@@ -1,12 +1,23 @@
 package com.clockworkjava.kursspring.domain;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity
 public class Quest {
 
-    private String description;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    private String description;
 
     private int reward = 100;
 
@@ -17,6 +28,12 @@ public class Quest {
     private boolean completed = false;
 
     protected LocalDateTime startDate;
+
+    @OneToOne
+    private Knight knight;
+
+    public Quest() {
+    }
 
     public Quest(int id, String description) {
         this.id = id;

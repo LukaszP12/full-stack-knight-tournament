@@ -1,13 +1,24 @@
 package com.clockworkjava.kursspring.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@Entity
 public class Knight {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull
@@ -20,6 +31,7 @@ public class Knight {
 
     private int level;
 
+    @OneToOne
     private Quest quest;
 
     public Knight() {
