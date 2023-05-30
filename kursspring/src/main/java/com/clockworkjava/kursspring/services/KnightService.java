@@ -7,7 +7,6 @@ import com.clockworkjava.kursspring.domain.repository.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -26,7 +25,7 @@ public class KnightService {
     }
 
     public void saveKnight(Knight knight) throws NotImplementedException {
-        knightRepository.createKnight(knight);
+        knightRepository.createKnight(knight.getName(),knight.getAge());
     }
 
     public Knight getKnight(Integer id) throws NotImplementedException {

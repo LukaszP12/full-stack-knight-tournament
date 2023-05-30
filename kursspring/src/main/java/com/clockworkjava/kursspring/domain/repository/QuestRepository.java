@@ -1,7 +1,6 @@
 package com.clockworkjava.kursspring.domain.repository;
 
 import com.clockworkjava.kursspring.domain.Quest;
-import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -40,11 +39,6 @@ public class QuestRepository {
         em.remove(quest);
     }
 
-    @PostConstruct
-    public void init() {
-
-    }
-
     @Override
     public String toString() {
         return "QuestRepository{" +
@@ -53,6 +47,7 @@ public class QuestRepository {
     }
 
     @Scheduled(fixedDelayString = "${questCreationDelay}")
+    @Transactional
     public void createRandomQuest() {
         List<String> descriptions = new ArrayList<>();
 

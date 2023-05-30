@@ -1,13 +1,10 @@
 package com.clockworkjava.kursspring.services;
 
 import com.clockworkjava.kursspring.domain.Quest;
-import com.clockworkjava.kursspring.domain.repository.InMemoryRepository;
 import com.clockworkjava.kursspring.domain.repository.KnightRepository;
 import com.clockworkjava.kursspring.domain.repository.NotImplementedException;
 import com.clockworkjava.kursspring.domain.repository.QuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

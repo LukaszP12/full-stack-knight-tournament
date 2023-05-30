@@ -2,13 +2,14 @@ package com.clockworkjava.kursspring.domain.repository;
 
 import com.clockworkjava.kursspring.domain.Knight;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface KnightRepository {
 
-    void createKnight(Knight knight) throws NotImplementedException;
+    void createKnight(String name, int age) throws NotImplementedException;
 
     Collection<Knight> getAllKnights() throws NotImplementedException;
 
@@ -16,7 +17,7 @@ public interface KnightRepository {
 
     void deleteKnight(Integer id) throws NotImplementedException;
 
-    void build();
+    void build() throws NotImplementedException;
 
     Knight getKnightById(Integer id) throws NotImplementedException;
 
