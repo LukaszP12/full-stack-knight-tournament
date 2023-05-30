@@ -1,8 +1,10 @@
 package com.clockworkjava.kursspring.domain.repository;
 
 import com.clockworkjava.kursspring.domain.Quest;
-import com.clockworkjava.kursspring.utils.Ids;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
@@ -15,22 +17,27 @@ import java.util.Random;
 @Repository
 public class QuestRepository {
 
+    @PersistenceContext
+    private EntityManager em;
+
     Random rand = new Random();
 
     Map<Integer, Quest> quests = new HashMap<>();
 
+    @Transactional
     public void createQuest(String description) {
-        int newId = Ids.getNewId(quests.keySet());
-        Quest newQuest = new Quest(newId, description);
-        quests.put(newId, newQuest);
+        Quest newQuest = new Quest(description);
+        em.persist(newQuest);
+        System.out.println(newQuest);
     }
 
     public List<Quest> getAll() {
-        return new ArrayList<>(quests.values());
+        return em.createQuery("from Quest", Quest.class).getResultList();
     }
 
+    @Transactional
     public void deleteQuest(Quest quest) {
-        quests.remove(quest);
+        em.remove(quest);
     }
 
     @PostConstruct
@@ -58,11 +65,12 @@ public class QuestRepository {
         createQuest(description);
     }
 
+    @Transactional
     public void update(Quest quest) {
-        quests.put(quest.getId(), quest);
+        em.merge(quest);
     }
 
     public Quest getQuest(Integer id) {
-        return quests.get(id);
+        return em.find(Quest.class, id);
     }
 }
