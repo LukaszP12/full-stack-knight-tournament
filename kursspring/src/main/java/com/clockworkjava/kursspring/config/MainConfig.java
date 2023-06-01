@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 @Configuration
 @PropertySource("classpath:knightRepository.properties")
@@ -47,6 +48,14 @@ public class MainConfig {
     public DuelingKnight createKnightBean() {
         DuelingKnight percival = new DuelingKnight("Percival", 25);
         return percival;
+    }
+
+    @Autowired
+    public void securityUsers(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("user1").password("user1").roles("USER")
+                .and()
+                .withUser("user2").password("user2").roles("ADMIN");
     }
 
 }
