@@ -4,6 +4,8 @@ import com.clockworkjava.kursspring.domain.Knight;
 import com.clockworkjava.kursspring.domain.PlayerInformation;
 import com.clockworkjava.kursspring.domain.repository.KnightRepository;
 import com.clockworkjava.kursspring.domain.repository.NotImplementedException;
+import com.clockworkjava.kursspring.domain.repository.PlayerInformationRepository;
+import com.clockworkjava.kursspring.domain.repository.QuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +20,17 @@ public class KnightService {
     private KnightRepository knightRepository;
 
     @Autowired
-    private PlayerInformation playerInformation;
+    private QuestRepository questRepository;
+
+    @Autowired
+    private PlayerInformationRepository playerInformation;
 
     public List<Knight> getAllKnights() throws NotImplementedException {
         return new ArrayList<>(knightRepository.getAllKnights());
     }
 
     public void saveKnight(Knight knight) throws NotImplementedException {
-        knightRepository.createKnight(knight.getName(),knight.getAge());
+        knightRepository.createKnight(knight.getName(), knight.getAge());
     }
 
     public Knight getKnight(Integer id) throws NotImplementedException {
@@ -66,12 +71,18 @@ public class KnightService {
         List<Knight> allKnights = getAllKnights();
         allKnights.stream().forEach(knight -> {
             if (knight.getQuest() != null) {
-                knight.getQuest().isCompleted();
+                boolean completed = knight.getQuest().isCompleted();
+
+                if (completed){
+                    questRepository.update(knight.getQuest());
+                }
+
             }
         });
 
-        int currentGold = playerInformation.getGold();
-        playerInformation.setGold(currentGold + collectRewards());
+        PlayerInformation first = playerInformation.getFirst();
+        int currentGold = first.getGold();
+        first.setGold(currentGold + collectRewards());
     }
 
 }
